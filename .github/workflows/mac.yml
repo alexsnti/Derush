@@ -17,7 +17,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - name: Construire Derush.app et le .dmg
-        run: ./scripts/build-mac.sh
+        run: bash ./scripts/build-mac.sh
       - uses: actions/upload-artifact@v4
         with:
           name: Derush-mac
