@@ -1,0 +1,9 @@
+/target
+app/node_modules
+app/dist
+app/src-tauri/gen
+.DS_Store
+# Binaires embarqués et icônes générés par scripts/build-mac.sh
+app/src-tauri/binaries/
+app/src-tauri/icons/*
+!app/src-tauri/icons/icon.png

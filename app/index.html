@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Derush</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="brand"><span class="brand-mark"></span>Derush <span id="dirty" class="dirty" style="visibility:hidden" title="Modifications non enregistrées">•</span></div>
+      <button id="btn-import" class="btn">Importer des rushes</button>
+      <button id="btn-open" class="btn ghost">Ouvrir</button>
+      <button id="btn-save" class="btn ghost" disabled>Enregistrer</button>
+      <div class="spacer"></div>
+      <div id="stats" class="stats"></div>
+      <button id="btn-export" class="btn primary" disabled>Exporter pour YouTube</button>
+    </header>
+
+    <main class="work">
+      <section class="stage">
+        <div class="screen" id="screen">
+          <video id="video" playsinline></video>
+          <div id="layer" class="layer"></div>
+          <div id="empty" class="empty">
+            <p class="empty-title">Glisse tes rushes ici</p>
+            <p>ou clique sur « Importer des rushes ». Les blancs sont repérés et coupés automatiquement, tu valides ensuite.</p>
+          </div>
+          <div id="busy" class="busy" hidden><div class="spinner"></div><p id="busy-text">Analyse du son…</p><button id="busy-cancel" class="btn small ghost" hidden>Annuler</button></div>
+        </div>
+        <div class="transport">
+          <button id="btn-play" class="btn round" disabled aria-label="Lecture">▶</button>
+          <span id="clock" class="clock">0:00 / 0:00</span>
+          <div class="spacer"></div>
+          <div class="seg-toggle" role="group" aria-label="Mode d'aperçu">
+            <button id="mode-program" class="on">Monté</button>
+            <button id="mode-raw">Rush brut</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <nav class="tabs">
+          <button data-tab="cuts" class="on">Coupes</button>
+          <button data-tab="text">Texte</button>
+          <button data-tab="dress">Habillage</button>
+          <button data-tab="export">Export</button>
+        </nav>
+        <div id="tab-cuts" class="tab"></div>
+        <div id="tab-text" class="tab" hidden></div>
+        <div id="tab-dress" class="tab" hidden></div>
+        <div id="tab-export" class="tab" hidden></div>
+      </aside>
+    </main>
+
+    <section class="timeline">
+      <div class="tl-tools">
+        <span class="legend"><i class="k-keep"></i>gardé <i class="k-silence"></i>blanc <i class="k-retake"></i>prise ratée <i class="k-manual"></i>coupé à la main</span>
+        <div class="spacer"></div>
+        <span id="sel-info" class="sel-info"></span>
+        <button id="btn-cut-sel" class="btn small" disabled>Couper la sélection <kbd>C</kbd></button>
+        <button id="btn-keep-sel" class="btn small ghost" disabled>Garder <kbd>G</kbd></button>
+        <label class="zoom">Zoom <input id="zoom" type="range" min="0" max="100" value="20" /></label>
+      </div>
+      <canvas id="tl"></canvas>
+      <p class="tl-help">Clic : aller ici · Glisser : sélectionner · Double-clic : garder/couper une zone · Molette : défiler · Espace : lecture</p>
+    </section>
+
+    <div id="toast" class="toast" hidden></div>
+    <div id="banner" class="banner" hidden>
+      <span>Le projet a été modifié en dehors de Derush (par Claude ?).</span>
+      <button id="banner-reload" class="btn small primary">Recharger</button>
+      <button id="banner-ignore" class="btn small ghost">Garder ma version</button>
+    </div>
+    <dialog id="export-dialog" class="modal">
+      <p class="modal-title" id="export-title">Export en cours…</p>
+      <progress id="export-progress" max="1" value="0"></progress>
+      <p id="export-detail" class="muted"></p>
+      <button id="export-close" class="btn" hidden>Fermer</button>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+[package]
+name = "derush-mcp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Serveur MCP de Derush : Claude lit la transcription et modifie le montage"
+
+[[bin]]
+name = "derush-mcp"
+path = "src/main.rs"
+
+[dependencies]
+base64 = "0.22"
+derush-core = { path = "../core" }
+serde_json.workspace = true
+tempfile.workspace = true
+
+[target.'cfg(target_os = "macos")'.dependencies]
+derush-core = { path = "../core", features = ["metal"] }

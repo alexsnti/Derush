@@ -1,0 +1,24 @@
+[package]
+name = "derush-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Modèle de projet, analyse audio, transcription et rendu ffmpeg pour Derush"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tempfile.workspace = true
+whisper-rs = { version = "0.16", optional = true }
+ureq = "3"
+
+[dev-dependencies]
+anyhow.workspace = true
+
+[features]
+default = ["transcribe"]
+# Transcription locale avec whisper.cpp (compilé avec la crate).
+transcribe = ["dep:whisper-rs"]
+# Accélération GPU sur les puces Apple.
+metal = ["whisper-rs?/metal"]
